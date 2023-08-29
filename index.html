@@ -3,20 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GOL</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex flex-col min-h-screen">
-  <main class="grow bg-slate-500">
+  <main class="grow bg-slate-800">
     <canvas
       id="canvas"
-      class="border border-slate-00 bg-white mx-auto mt-12"
-      width="1000px"
-      height="250px"
+      class="bg-white mx-auto mt-5"
+      width="900px"
+      height="300px"
     >
     </canvas>
   </main>
-  <footer class="border">
-    test
+  <footer class="bg-slate-900 text-white p-2">
+    <span id="indicator">&nbsp;</span>
   </footer>
   <script src="app.js"></script>
 </body>
