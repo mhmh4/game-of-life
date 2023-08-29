@@ -26,6 +26,11 @@ console.log("height: " + canvas.clientHeight);
 const CELL_LENGTH = 25;
 const cells = [];
 
+const m = canvas.clientWidth / CELL_LENGTH;
+const n = canvas.clientHeight / CELL_LENGTH;
+
+const grid = [...Array(m)].map(() => Array(n));
+
 const map = new Map();
 
 startButton.addEventListener("click", (event) => {
@@ -60,6 +65,7 @@ for (let i = 0; i < canvas.clientWidth; i += CELL_LENGTH) {
     ctx.beginPath();
     ctx.rect(i, j, i + CELL_LENGTH, j + CELL_LENGTH);
     const c = new Cell([i, j], [i + CELL_LENGTH, j + CELL_LENGTH]);
+    grid[i / CELL_LENGTH][j / CELL_LENGTH] = c;
     // const key = [i, j];
     map.set(`${i}-${j}`, c);
     cells.push(c);
@@ -105,6 +111,39 @@ canvas.addEventListener("click", (event) => {
   drawCells(cells);
 });
 
+function countAliveNeighborCells(cells, i, j) {
+  const d = [-1, 0, 1];
+  let count = 0;
+  for (const x of d) {
+    for (const y of d) {
+      if (x === 0 && y === 0) continue;
+      const dx = i + x;
+      const dy = j + y;
+      if (!(0 <= dx && dx < m && 0 <= dy && dy < n)) {
+        // const key = `{}`
+        // if (map.get)
+      }
+    }
+  }
+}
+
+function createNextGeneration(cells) {
+  // const newCells = cells.map((row) => row.slice());
+
+  const copy = [];
+
+  for (let i = 0; i < cells.length; i++) {
+    const innerArray = [];
+    for (let j = 0; j < cells[i].length; j++) {
+      cells.push(cells[i][j]);
+    }
+    copy.push(innerArray);
+  }
+
+  console.log(copy);
+  return copy;
+}
+
 // canvas.addEventListener("mousedown", (event) => {
 //   const [x, y] = getMousePosition(event);
 //   console.log("clicked canvas at " + x + " " + y);
@@ -123,3 +162,5 @@ canvas.addEventListener("mousemove", (event) => {
 });
 
 console.log(Cell);
+
+createNextGeneration(cells);
