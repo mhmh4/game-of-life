@@ -39,25 +39,47 @@ startButton.addEventListener("click", (event) => {
 
 function drawCells(cells) {
   ctx.strokeStyle = "#bbb";
-  for (const cell of cells) {
-    ctx.beginPath();
-    ctx.rect(
-      cell.topLeftPosition[0],
-      cell.topLeftPosition[1],
-      cell.bottomRightPosition[0],
-      cell.bottomRightPosition[1]
-    );
-    if (cell.isAlive()) {
-      ctx.fillStyle = "#bbb";
-      ctx.fill();
-    } else {
-      ctx.fillStyle = "#fff";
-      ctx.fill();
-      ctx.strokeStyle = "#bbb";
-      ctx.stroke();
-      // ctx.stroke();
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[0].length; j++) {
+      ctx.beginPath();
+      const cell = grid[i][j];
+      ctx.rect(
+        cell.topLeftPosition[0],
+        cell.topLeftPosition[1],
+        cell.bottomRightPosition[0],
+        cell.bottomRightPosition[1]
+      );
+      if (cell.isAlive()) {
+        ctx.fillStyle = "#bbb";
+        ctx.fill();
+      } else {
+        ctx.fillStyle = "#fff";
+        ctx.fill();
+        ctx.strokeStyle = "#bbb";
+        ctx.stroke();
+        // ctx.stroke();
+      }
     }
   }
+  // for (const cell of cells) {
+  //   ctx.beginPath();
+  //   ctx.rect(
+  //     cell.topLeftPosition[0],
+  //     cell.topLeftPosition[1],
+  //     cell.bottomRightPosition[0],
+  //     cell.bottomRightPosition[1]
+  //   );
+  //   if (cell.isAlive()) {
+  //     ctx.fillStyle = "#bbb";
+  //     ctx.fill();
+  //   } else {
+  //     ctx.fillStyle = "#fff";
+  //     ctx.fill();
+  //     ctx.strokeStyle = "#bbb";
+  //     ctx.stroke();
+  //     // ctx.stroke();
+  //   }
+  // }
 }
 
 for (let i = 0; i < canvas.clientWidth; i += CELL_LENGTH) {
@@ -120,16 +142,17 @@ function countAliveNeighborCells(cells, i, j) {
       const dx = i + x;
       const dy = j + y;
       if (!(0 <= dx && dx < m && 0 <= dy && dy < n)) {
-        // const key = `{}`
-        // if (map.get)
+        continue;
+      }
+      if (cells[i][j].isAlive()) {
+        count++;
       }
     }
   }
+  return count;
 }
 
 function createNextGeneration(cells) {
-  // const newCells = cells.map((row) => row.slice());
-
   const copy = [];
 
   for (let i = 0; i < cells.length; i++) {
@@ -141,6 +164,14 @@ function createNextGeneration(cells) {
   }
 
   console.log(copy);
+
+  for (let i = 0; i < cells.length; i++) {
+    for (let j = 0; j < cells[i].length; j++) {
+      const aliveNeighbors = countAliveNeighborCells(cells, i, j);
+      console.log(aliveNeighbors);
+    }
+  }
+
   return copy;
 }
 
