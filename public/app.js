@@ -1,3 +1,11 @@
+// class Cell_ {
+//   // i and j refers to its position in a 2d array, not the actual position on the canvas
+//   i;
+//   j;
+//   // 0 denotes dead, 1 denotes alive
+//   state;
+// }
+
 class Cell {
   topLeftPosition;
   bottomRightPosition;
@@ -35,9 +43,11 @@ const map = new Map();
 
 startButton.addEventListener("click", (event) => {
   event.preventDefault();
+  createNextGeneration(grid);
+  drawCells(grid);
 });
 
-function drawCells(cells) {
+function drawCells(grid) {
   ctx.strokeStyle = "#bbb";
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[0].length; j++) {
@@ -57,29 +67,9 @@ function drawCells(cells) {
         ctx.fill();
         ctx.strokeStyle = "#bbb";
         ctx.stroke();
-        // ctx.stroke();
       }
     }
   }
-  // for (const cell of cells) {
-  //   ctx.beginPath();
-  //   ctx.rect(
-  //     cell.topLeftPosition[0],
-  //     cell.topLeftPosition[1],
-  //     cell.bottomRightPosition[0],
-  //     cell.bottomRightPosition[1]
-  //   );
-  //   if (cell.isAlive()) {
-  //     ctx.fillStyle = "#bbb";
-  //     ctx.fill();
-  //   } else {
-  //     ctx.fillStyle = "#fff";
-  //     ctx.fill();
-  //     ctx.strokeStyle = "#bbb";
-  //     ctx.stroke();
-  //     // ctx.stroke();
-  //   }
-  // }
 }
 
 for (let i = 0; i < canvas.clientWidth; i += CELL_LENGTH) {
@@ -95,7 +85,7 @@ for (let i = 0; i < canvas.clientWidth; i += CELL_LENGTH) {
   }
 }
 
-drawCells(cells);
+drawCells(grid);
 
 function getCellContainingPosition(x, y) {
   const targetTopLeftCornerX = Math.floor(x / CELL_LENGTH) * CELL_LENGTH;
@@ -113,14 +103,6 @@ function getMousePosition(event) {
 }
 
 canvas.addEventListener("click", (event) => {
-  // const rect = canvas.getBoundingClientRect();
-  // console.log(
-  //   `clicked canvas at (${
-  //     ((evt.clientX - rect.left) / (rect.right - rect.left)) * canvas.width
-  //   }, ${
-  //     ((evt.clientY - rect.top) / (rect.bottom - rect.top)) * canvas.height
-  //   })`
-  // );
   const [x, y] = getMousePosition(event);
   console.log("clicked canvas at " + x + " " + y);
   const [a, b] = getCellContainingPosition(x, y);
@@ -130,7 +112,7 @@ canvas.addEventListener("click", (event) => {
   const c = map.get(`${a}-${b}`);
   console.log("clicked: " + c);
   c.toggle();
-  drawCells(cells);
+  drawCells(grid);
 });
 
 function countAliveNeighborCells(cells, i, j) {
@@ -144,7 +126,7 @@ function countAliveNeighborCells(cells, i, j) {
       if (!(0 <= dx && dx < m && 0 <= dy && dy < n)) {
         continue;
       }
-      if (cells[i][j].isAlive()) {
+      if (cells[dx][dy].isAlive()) {
         count++;
       }
     }
@@ -169,24 +151,20 @@ function createNextGeneration(cells) {
     for (let j = 0; j < cells[i].length; j++) {
       const aliveNeighbors = countAliveNeighborCells(cells, i, j);
       console.log(aliveNeighbors);
+      const isAlive = cells[i][j].isAlive();
+      const hasTwoAliveNeighbors = aliveNeighbors === 2;
+      const hasThreeAliveNeighbors = aliveNeighbors === 3;
+      if (isAlive && !(hasTwoAliveNeighbors || hasThreeAliveNeighbors)) {
+        cells[i][j].toggle();
+      } else if (!aliveNeighbors && hasThreeAliveNeighbors) {
+        cells[i][j].toggle();
+      }
     }
   }
 
+  cells = copy;
   return copy;
 }
-
-// canvas.addEventListener("mousedown", (event) => {
-//   const [x, y] = getMousePosition(event);
-//   console.log("clicked canvas at " + x + " " + y);
-//   const [a, b] = getCellContainingPosition(x, y);
-//   // const k = [a, b];
-//   // console.log([a, b]);
-//   // console.log(map.get(`${a}-${b}`));
-//   const c = map.get(`${a}-${b}`);
-//   console.log("clicked: " + c);
-//   c.toggle();
-//   drawCells(cells);
-// });
 
 canvas.addEventListener("mousemove", (event) => {
   indicator.innerText = getMousePosition(event);
@@ -195,3 +173,7 @@ canvas.addEventListener("mousemove", (event) => {
 console.log(Cell);
 
 createNextGeneration(cells);
+
+function main() {}
+
+main();
