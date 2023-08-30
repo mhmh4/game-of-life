@@ -9,7 +9,7 @@ const startButton = document.getElementById("start-button");
 console.log(canvas);
 console.log(`(width: ${canvas.clientWidth}, height: ${canvas.clientHeight})`);
 
-const CELL_LENGTH = 25;
+const CELL_LENGTH = 20;
 
 const m = canvas.clientWidth / CELL_LENGTH;
 const n = canvas.clientHeight / CELL_LENGTH;
@@ -20,7 +20,7 @@ startButton.addEventListener("click", () => {
   setInterval(() => {
     grid = createNextGeneration(grid);
     drawCells(grid);
-  }, 250);
+  }, 100);
 });
 
 function drawCells(grid) {
@@ -74,15 +74,18 @@ function getMousePosition(event) {
   return [x, y];
 }
 
-canvas.addEventListener("click", (event) => {
-  const [x, y] = getMousePosition(event);
-  console.log("clicked canvas at " + x + " " + y);
+canvas.addEventListener("mousemove", (event) => {
+  if (event.buttons == 1) {
+    const [x, y] = getMousePosition(event);
+    console.log("clicked canvas at " + x + " " + y);
 
-  const [a, b] = getCellContainingPosition(x, y);
-  let c = grid[a / CELL_LENGTH][b / CELL_LENGTH];
+    const [a, b] = getCellContainingPosition(x, y);
+    let c = grid[a / CELL_LENGTH][b / CELL_LENGTH];
 
-  c.toggle();
-  drawCells(grid);
+    // c.toggle();
+    c.makeAlive();
+    drawCells(grid);
+  }
 });
 
 function countAliveNeighborCells(cells, i, j) {

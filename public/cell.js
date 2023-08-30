@@ -17,6 +17,7 @@ class Cell {
     this.state = 0;
   }
 
+  makeAlive = () => (this.state = 1);
   toggle = () => (this.state = this.state ? 0 : 1);
   isAlive = () => this.state === 1;
 }
