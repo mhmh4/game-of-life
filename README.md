@@ -15,3 +15,5 @@ npm i
 ```
 npx http-server
 ```
+
+3\. Open a browser to `localhost:8080` to see the app.
