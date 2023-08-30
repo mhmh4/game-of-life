@@ -7,6 +7,8 @@ const ctx = canvas.getContext("2d");
 const startButton = document.getElementById("start-button");
 const stopButton = document.getElementById("stop-button");
 const clearButton = document.getElementById("clear-button");
+const runningState = document.getElementById("running-state");
+runningState.innerText = "idle";
 
 console.log(canvas);
 console.log(`(width: ${canvas.clientWidth}, height: ${canvas.clientHeight})`);
@@ -21,6 +23,7 @@ let grid = [...Array(m)].map(() => Array(n));
 let intervalId;
 
 startButton.addEventListener("click", () => {
+  runningState.innerText = "running";
   intervalId = setInterval(() => {
     grid = createNextGeneration(grid);
     drawCells(grid);
@@ -29,6 +32,7 @@ startButton.addEventListener("click", () => {
 
 stopButton.addEventListener("click", () => {
   clearInterval(intervalId);
+  runningState.innerText = "off";
 });
 
 clearButton.addEventListener("click", () => {
