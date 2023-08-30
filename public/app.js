@@ -17,8 +17,10 @@ const n = canvas.clientHeight / CELL_LENGTH;
 let grid = [...Array(m)].map(() => Array(n));
 
 startButton.addEventListener("click", () => {
-  grid = createNextGeneration(grid);
-  drawCells(grid);
+  setInterval(() => {
+    grid = createNextGeneration(grid);
+    drawCells(grid);
+  }, 250);
 });
 
 function drawCells(grid) {
