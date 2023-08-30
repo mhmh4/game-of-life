@@ -45,7 +45,7 @@ for (let i = 0; i < grid.length; i++) {
 startButton.addEventListener("click", () => {
   runningState.innerText = "running";
   intervalId = setInterval(() => {
-    grid = createNextGeneration(grid);
+    createNextGeneration(grid);
     drawCells(grid);
   }, 100);
 });
@@ -170,6 +170,5 @@ function createNextGeneration(grid) {
     }
   }
 
-  // grid = Array.apply(null, copy);
-  return copy;
+  grid = copy.map((row) => [...row]);
 }
