@@ -8,7 +8,6 @@ const startButton = document.getElementById("start-button");
 const stopButton = document.getElementById("stop-button");
 const clearButton = document.getElementById("clear-button");
 const runningState = document.getElementById("running-state");
-runningState.innerText = "idle";
 
 console.log(canvas);
 console.log(`(width: ${canvas.clientWidth}, height: ${canvas.clientHeight})`);
@@ -49,7 +48,7 @@ startButton.addEventListener("click", () => {
 
 stopButton.addEventListener("click", () => {
   clearInterval(intervalId);
-  runningState.innerText = "off";
+  runningState.innerText = "idle";
 });
 
 clearButton.addEventListener("click", () => {
