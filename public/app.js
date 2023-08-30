@@ -6,6 +6,7 @@ const ctx = canvas.getContext("2d");
 
 const startButton = document.getElementById("start-button");
 const stopButton = document.getElementById("stop-button");
+const clearButton = document.getElementById("clear-button");
 
 console.log(canvas);
 console.log(`(width: ${canvas.clientWidth}, height: ${canvas.clientHeight})`);
@@ -28,6 +29,17 @@ startButton.addEventListener("click", () => {
 
 stopButton.addEventListener("click", () => {
   clearInterval(intervalId);
+});
+
+clearButton.addEventListener("click", () => {
+  stopButton.click();
+  drawCells(grid);
+  for (const row of grid) {
+    for (const cell of row) {
+      cell.makeDead();
+    }
+  }
+  drawCells(grid);
 });
 
 function drawCells(grid) {
