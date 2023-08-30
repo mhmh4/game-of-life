@@ -132,7 +132,8 @@ function countAliveNeighborCells(cells, i, j) {
       if (x === 0 && y === 0) continue;
       const dx = i + x;
       const dy = j + y;
-      if (!(0 <= dx && dx < m && 0 <= dy && dy < n)) {
+      const isInvalidPosition = dx < 0 || dx == m || dy < 0 || dy == n;
+      if (isInvalidPosition) {
         continue;
       }
       if (cells[dx][dy].isAlive()) {
@@ -148,16 +149,23 @@ function createNextGeneration(grid) {
 
   for (let i = 0; i < copy.length; i++) {
     for (let j = 0; j < copy[i].length; j++) {
-      const alive = grid[i][j].isAlive();
-
+      const isAlive = grid[i][j].isAlive();
       const aliveNeighbors = countAliveNeighborCells(grid, i, j);
-      const has2AliveNeighbors = aliveNeighbors === 2;
-      const has3AliveNeighbors = aliveNeighbors === 3;
 
-      if (alive && !(has2AliveNeighbors || has3AliveNeighbors)) {
-        copy[i][j].toggle();
-      } else if (!alive && has3AliveNeighbors) {
-        copy[i][j].toggle();
+      copy[i][j] = grid[i][j];
+
+      if (isAlive) {
+        if (aliveNeighbors === 2 || aliveNeighbors === 3) {
+          // stays alive
+        } else {
+          copy[i][j].toggle();
+        }
+      } else {
+        if (aliveNeighbors === 3) {
+          copy[i][j].toggle();
+        } else {
+          // stays dead
+        }
       }
     }
   }
