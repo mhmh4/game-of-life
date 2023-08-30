@@ -7,21 +7,16 @@ const ctx = canvas.getContext("2d");
 const startButton = document.getElementById("start-button");
 
 console.log(canvas);
-console.log("width: " + canvas.clientWidth);
-console.log("height: " + canvas.clientHeight);
+console.log(`(width: ${canvas.clientWidth}, height: ${canvas.clientHeight})`);
 
 const CELL_LENGTH = 25;
-const cells = [];
 
 const m = canvas.clientWidth / CELL_LENGTH;
 const n = canvas.clientHeight / CELL_LENGTH;
 
-const grid = [...Array(m)].map(() => Array(n));
+let grid = [...Array(m)].map(() => Array(n));
 
-const map = new Map();
-
-startButton.addEventListener("click", (event) => {
-  event.preventDefault();
+startButton.addEventListener("click", () => {
   createNextGeneration(grid);
   drawCells(grid);
 });
@@ -57,10 +52,6 @@ for (let i = 0; i < canvas.clientWidth; i += CELL_LENGTH) {
     ctx.rect(i, j, i + CELL_LENGTH, j + CELL_LENGTH);
     const c = new Cell([i, j], [i + CELL_LENGTH, j + CELL_LENGTH]);
     grid[i / CELL_LENGTH][j / CELL_LENGTH] = c;
-    // const key = [i, j];
-    map.set(`${i}-${j}`, c);
-    cells.push(c);
-    // ctx.stroke();
   }
 }
 
@@ -85,10 +76,6 @@ canvas.addEventListener("click", (event) => {
   const [x, y] = getMousePosition(event);
   console.log("clicked canvas at " + x + " " + y);
   const [a, b] = getCellContainingPosition(x, y);
-  // const k = [a, b];
-  // console.log([a, b]);
-  // console.log(map.get(`${a}-${b}`));
-  const c = map.get(`${a}-${b}`);
   console.log("clicked: " + c);
   c.toggle();
   drawCells(grid);
@@ -126,32 +113,27 @@ function createNextGeneration(cells) {
 
   console.log(copy);
 
-  for (let i = 0; i < cells.length; i++) {
-    for (let j = 0; j < cells[i].length; j++) {
+  for (let i = 0; i < copy.length; i++) {
+    for (let j = 0; j < copy[i].length; j++) {
       const aliveNeighbors = countAliveNeighborCells(cells, i, j);
-      console.log(aliveNeighbors);
-      const isAlive = cells[i][j].isAlive();
+      const alive = cells[i][j].isAlive();
       const hasTwoAliveNeighbors = aliveNeighbors === 2;
       const hasThreeAliveNeighbors = aliveNeighbors === 3;
-      if (isAlive && !(hasTwoAliveNeighbors || hasThreeAliveNeighbors)) {
-        cells[i][j].toggle();
-      } else if (!aliveNeighbors && hasThreeAliveNeighbors) {
-        cells[i][j].toggle();
+      if (alive && !(hasTwoAliveNeighbors || hasThreeAliveNeighbors)) {
+        copy[i][j].toggle();
+      } else if (!alive && hasThreeAliveNeighbors) {
+        copy[i][j].toggle();
       }
     }
   }
 
-  cells = copy;
-  return copy;
+  grid = Array.apply(null, copy);
+  return grid;
 }
 
 canvas.addEventListener("mousemove", (event) => {
   indicator.innerText = getMousePosition(event);
 });
-
-console.log(Cell);
-
-createNextGeneration(cells);
 
 function main() {}
 
