@@ -22,12 +22,9 @@ let intervalId;
 
 let grid = [...Array(m)].map(() => Array(n));
 
-for (let i = 0; i < canvas.clientWidth; i += CELL_LENGTH) {
-  for (let j = 0; j < canvas.clientHeight; j += CELL_LENGTH) {
-    ctx.beginPath();
-    ctx.rect(i, j, i + CELL_LENGTH, j + CELL_LENGTH);
-    const c = new Cell();
-    grid[i / CELL_LENGTH][j / CELL_LENGTH] = c;
+for (let i = 0; i < m; i++) {
+  for (let j = 0; j < n; j++) {
+    grid[i][j] = new Cell();
   }
 }
 
