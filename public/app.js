@@ -18,9 +18,29 @@ const CELL_LENGTH = 20;
 const m = canvas.clientWidth / CELL_LENGTH;
 const n = canvas.clientHeight / CELL_LENGTH;
 
+let intervalId;
+
 let grid = [...Array(m)].map(() => Array(n));
 
-let intervalId;
+for (let i = 0; i < canvas.clientWidth; i += CELL_LENGTH) {
+  for (let j = 0; j < canvas.clientHeight; j += CELL_LENGTH) {
+    ctx.beginPath();
+    ctx.rect(i, j, i + CELL_LENGTH, j + CELL_LENGTH);
+    const c = new Cell([i, j], [i + CELL_LENGTH, j + CELL_LENGTH]);
+    grid[i / CELL_LENGTH][j / CELL_LENGTH] = c;
+  }
+}
+
+drawCells(grid);
+
+const copy = [];
+for (let i = 0; i < grid.length; i++) {
+  const innerArray = [];
+  for (let j = 0; j < grid[i].length; j++) {
+    innerArray.push(grid[i][j]);
+  }
+  copy.push(innerArray);
+}
 
 startButton.addEventListener("click", () => {
   runningState.innerText = "running";
@@ -44,6 +64,24 @@ clearButton.addEventListener("click", () => {
     }
   }
   drawCells(grid);
+});
+
+canvas.addEventListener("mousemove", (event) => {
+  if (event.buttons == 1) {
+    const [x, y] = getMousePosition(event);
+    console.log("clicked canvas at " + x + " " + y);
+
+    const [a, b] = getCellContainingPosition(x, y);
+    let c = grid[a / CELL_LENGTH][b / CELL_LENGTH];
+
+    // c.toggle();
+    c.makeAlive();
+    drawCells(grid);
+  }
+});
+
+canvas.addEventListener("mousemove", (event) => {
+  indicator.innerText = getMousePosition(event);
 });
 
 function drawCells(grid) {
@@ -71,17 +109,6 @@ function drawCells(grid) {
   }
 }
 
-for (let i = 0; i < canvas.clientWidth; i += CELL_LENGTH) {
-  for (let j = 0; j < canvas.clientHeight; j += CELL_LENGTH) {
-    ctx.beginPath();
-    ctx.rect(i, j, i + CELL_LENGTH, j + CELL_LENGTH);
-    const c = new Cell([i, j], [i + CELL_LENGTH, j + CELL_LENGTH]);
-    grid[i / CELL_LENGTH][j / CELL_LENGTH] = c;
-  }
-}
-
-drawCells(grid);
-
 function getCellContainingPosition(x, y) {
   const targetTopLeftCornerX = Math.floor(x / CELL_LENGTH) * CELL_LENGTH;
   const targetTopLeftCornerY = Math.floor(y / CELL_LENGTH) * CELL_LENGTH;
@@ -96,20 +123,6 @@ function getMousePosition(event) {
     ((event.clientY - rect.top) / (rect.bottom - rect.top)) * canvas.height;
   return [x, y];
 }
-
-canvas.addEventListener("mousemove", (event) => {
-  if (event.buttons == 1) {
-    const [x, y] = getMousePosition(event);
-    console.log("clicked canvas at " + x + " " + y);
-
-    const [a, b] = getCellContainingPosition(x, y);
-    let c = grid[a / CELL_LENGTH][b / CELL_LENGTH];
-
-    // c.toggle();
-    c.makeAlive();
-    drawCells(grid);
-  }
-});
 
 function countAliveNeighborCells(cells, i, j) {
   const d = [-1, 0, 1];
@@ -128,16 +141,6 @@ function countAliveNeighborCells(cells, i, j) {
     }
   }
   return count;
-}
-
-const copy = [];
-
-for (let i = 0; i < grid.length; i++) {
-  const innerArray = [];
-  for (let j = 0; j < grid[i].length; j++) {
-    innerArray.push(grid[i][j]);
-  }
-  copy.push(innerArray);
 }
 
 function createNextGeneration(grid) {
@@ -162,11 +165,3 @@ function createNextGeneration(grid) {
   // grid = Array.apply(null, copy);
   return copy;
 }
-
-canvas.addEventListener("mousemove", (event) => {
-  indicator.innerText = getMousePosition(event);
-});
-
-function main() {}
-
-main();
