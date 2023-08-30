@@ -1,5 +1,7 @@
 # GOL
 
+<img src="./images/screenshot.png">
+
 ## Quickstart
 
 1\. Install dependencies.
