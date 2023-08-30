@@ -5,6 +5,7 @@ const indicator = document.getElementById("indicator");
 const ctx = canvas.getContext("2d");
 
 const startButton = document.getElementById("start-button");
+const stopButton = document.getElementById("stop-button");
 
 console.log(canvas);
 console.log(`(width: ${canvas.clientWidth}, height: ${canvas.clientHeight})`);
@@ -16,11 +17,17 @@ const n = canvas.clientHeight / CELL_LENGTH;
 
 let grid = [...Array(m)].map(() => Array(n));
 
+let intervalId;
+
 startButton.addEventListener("click", () => {
-  setInterval(() => {
+  intervalId = setInterval(() => {
     grid = createNextGeneration(grid);
     drawCells(grid);
   }, 100);
+});
+
+stopButton.addEventListener("click", () => {
+  clearInterval(intervalId);
 });
 
 function drawCells(grid) {
