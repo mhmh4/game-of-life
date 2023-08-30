@@ -1,19 +1,7 @@
-// class Cell_ {
-//   // i and j refers to its position in a 2d array, not the actual position on the canvas
-//   i;
-//   j;
-//   // 0 denotes dead, 1 denotes alive
-//   state;
-// }
-
 class Cell {
-  topLeftPosition;
-  bottomRightPosition;
   state;
 
-  constructor(topLeftPosition, bottomRightPosition) {
-    this.topLeftPosition = topLeftPosition;
-    this.bottomRightPosition = bottomRightPosition;
+  constructor() {
     this.state = 0;
   }
 

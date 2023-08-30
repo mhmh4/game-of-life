@@ -26,7 +26,7 @@ for (let i = 0; i < canvas.clientWidth; i += CELL_LENGTH) {
   for (let j = 0; j < canvas.clientHeight; j += CELL_LENGTH) {
     ctx.beginPath();
     ctx.rect(i, j, i + CELL_LENGTH, j + CELL_LENGTH);
-    const c = new Cell([i, j], [i + CELL_LENGTH, j + CELL_LENGTH]);
+    const c = new Cell();
     grid[i / CELL_LENGTH][j / CELL_LENGTH] = c;
   }
 }
@@ -91,10 +91,10 @@ function drawCells(grid) {
       ctx.beginPath();
       const cell = grid[i][j];
       ctx.rect(
-        cell.topLeftPosition[0],
-        cell.topLeftPosition[1],
-        cell.bottomRightPosition[0],
-        cell.bottomRightPosition[1]
+        i * CELL_LENGTH,
+        j * CELL_LENGTH,
+        i * CELL_LENGTH + CELL_LENGTH,
+        j * CELL_LENGTH + CELL_LENGTH
       );
       if (cell.isAlive()) {
         ctx.fillStyle = "#bbb";
