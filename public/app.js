@@ -17,7 +17,7 @@ const n = canvas.clientHeight / CELL_LENGTH;
 let grid = [...Array(m)].map(() => Array(n));
 
 startButton.addEventListener("click", () => {
-  createNextGeneration(grid);
+  grid = createNextGeneration(grid);
   drawCells(grid);
 });
 
@@ -75,8 +75,10 @@ function getMousePosition(event) {
 canvas.addEventListener("click", (event) => {
   const [x, y] = getMousePosition(event);
   console.log("clicked canvas at " + x + " " + y);
+
   const [a, b] = getCellContainingPosition(x, y);
-  console.log("clicked: " + c);
+  let c = grid[a / CELL_LENGTH][b / CELL_LENGTH];
+
   c.toggle();
   drawCells(grid);
 });
@@ -100,13 +102,13 @@ function countAliveNeighborCells(cells, i, j) {
   return count;
 }
 
-function createNextGeneration(cells) {
+function createNextGeneration(grid) {
   const copy = [];
 
-  for (let i = 0; i < cells.length; i++) {
+  for (let i = 0; i < grid.length; i++) {
     const innerArray = [];
-    for (let j = 0; j < cells[i].length; j++) {
-      cells.push(cells[i][j]);
+    for (let j = 0; j < grid[i].length; j++) {
+      innerArray.push(grid[i][j]);
     }
     copy.push(innerArray);
   }
@@ -115,20 +117,22 @@ function createNextGeneration(cells) {
 
   for (let i = 0; i < copy.length; i++) {
     for (let j = 0; j < copy[i].length; j++) {
-      const aliveNeighbors = countAliveNeighborCells(cells, i, j);
-      const alive = cells[i][j].isAlive();
-      const hasTwoAliveNeighbors = aliveNeighbors === 2;
-      const hasThreeAliveNeighbors = aliveNeighbors === 3;
-      if (alive && !(hasTwoAliveNeighbors || hasThreeAliveNeighbors)) {
+      const alive = grid[i][j].isAlive();
+
+      const aliveNeighbors = countAliveNeighborCells(grid, i, j);
+      const has2AliveNeighbors = aliveNeighbors === 2;
+      const has3AliveNeighbors = aliveNeighbors === 3;
+
+      if (alive && !(has2AliveNeighbors || has3AliveNeighbors)) {
         copy[i][j].toggle();
-      } else if (!alive && hasThreeAliveNeighbors) {
+      } else if (!alive && has3AliveNeighbors) {
         copy[i][j].toggle();
       }
     }
   }
 
-  grid = Array.apply(null, copy);
-  return grid;
+  // grid = Array.apply(null, copy);
+  return copy;
 }
 
 canvas.addEventListener("mousemove", (event) => {
