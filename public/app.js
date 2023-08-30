@@ -107,17 +107,17 @@ function countAliveNeighborCells(cells, i, j) {
   return count;
 }
 
-function createNextGeneration(grid) {
-  const copy = [];
+const copy = [];
 
-  for (let i = 0; i < grid.length; i++) {
-    const innerArray = [];
-    for (let j = 0; j < grid[i].length; j++) {
-      innerArray.push(grid[i][j]);
-    }
-    copy.push(innerArray);
+for (let i = 0; i < grid.length; i++) {
+  const innerArray = [];
+  for (let j = 0; j < grid[i].length; j++) {
+    innerArray.push(grid[i][j]);
   }
+  copy.push(innerArray);
+}
 
+function createNextGeneration(grid) {
   console.log(copy);
 
   for (let i = 0; i < copy.length; i++) {
