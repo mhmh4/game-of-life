@@ -1,5 +1,5 @@
 import Cell from "./cell.js";
-import { CELL_LENGTH } from "./settings.js";
+import { CELL_LENGTH, DELAY } from "./settings.js";
 
 const canvas = document.getElementById("canvas");
 const indicator = document.getElementById("indicator");
@@ -41,7 +41,7 @@ startButton.addEventListener("click", () => {
   intervalId = setInterval(() => {
     createNextGeneration(grid);
     drawCells(grid);
-  }, 250);
+  }, DELAY);
 });
 
 stopButton.addEventListener("click", () => {
