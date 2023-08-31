@@ -1,4 +1,5 @@
 import Cell from "./cell.js";
+import { CELL_LENGTH } from "./settings.js";
 
 const canvas = document.getElementById("canvas");
 const indicator = document.getElementById("indicator");
@@ -11,8 +12,6 @@ const runningState = document.getElementById("running-state");
 
 console.log(canvas);
 console.log(`(width: ${canvas.clientWidth}, height: ${canvas.clientHeight})`);
-
-const CELL_LENGTH = 20;
 
 const m = canvas.clientWidth / CELL_LENGTH;
 const n = canvas.clientHeight / CELL_LENGTH;
