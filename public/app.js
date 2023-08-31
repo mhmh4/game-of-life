@@ -79,8 +79,8 @@ canvas.addEventListener("mousemove", (event) => {
 });
 
 function drawCells(grid) {
-  for (let j = 0; j < grid[0].length; j++) {
-    for (let i = 0; i < grid.length; i++) {
+  for (let j = 0; j < n; j++) {
+    for (let i = 0; i < m; i++) {
       ctx.beginPath();
       const cell = grid[i][j];
       ctx.rect(
@@ -142,8 +142,8 @@ function countAliveNeighborCells(cells, i, j) {
 function createNextGeneration(grid) {
   console.log(copy);
 
-  for (let i = 0; i < copy.length; i++) {
-    for (let j = 0; j < copy[i].length; j++) {
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
       const isAlive = grid[i][j].isAlive();
       const aliveNeighbors = countAliveNeighborCells(grid, i, j);
 
