@@ -70,7 +70,6 @@ canvas.addEventListener("mousemove", (event) => {
     const [a, b] = getCellContainingPosition(x, y);
     let c = grid[a][b];
 
-    // c.toggle();
     c.makeAlive();
     drawCells(grid);
   }
