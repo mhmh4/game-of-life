@@ -2,7 +2,7 @@ import Cell from "./cell.js";
 import { CELL_LENGTH, DELAY } from "./settings.js";
 
 const canvas = document.getElementById("canvas");
-const indicator = document.getElementById("indicator");
+const mouseIndicator = document.getElementById("mouse-indicator");
 const ctx = canvas.getContext("2d");
 
 const startButton = document.getElementById("start-button");
@@ -74,7 +74,7 @@ canvas.addEventListener("mousemove", (event) => {
 });
 
 canvas.addEventListener("mousemove", (event) => {
-  indicator.innerText = getMousePosition(event);
+  mouseIndicator.innerText = getMousePosition(event);
 });
 
 function drawCells(grid) {
