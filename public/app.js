@@ -110,10 +110,12 @@ function getCellContainingPosition(x, y) {
 
 function getMousePosition(event) {
   const rect = canvas.getBoundingClientRect();
-  const x =
-    ((event.clientX - rect.left) / (rect.right - rect.left)) * canvas.width;
-  const y =
-    ((event.clientY - rect.top) / (rect.bottom - rect.top)) * canvas.height;
+  const x = Math.floor(
+    ((event.clientX - rect.left) / (rect.right - rect.left)) * canvas.width
+  );
+  const y = Math.floor(
+    ((event.clientY - rect.top) / (rect.bottom - rect.top)) * canvas.height
+  );
   return [x, y];
 }
 
