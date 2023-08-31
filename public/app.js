@@ -1,7 +1,10 @@
 import Cell from "./cell.js";
-import { CELL_LENGTH, DELAY } from "./settings.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, CELL_LENGTH, DELAY } from "./settings.js";
 
 const canvas = document.getElementById("canvas");
+canvas.width = CANVAS_WIDTH;
+canvas.height = CANVAS_HEIGHT;
+
 const ctx = canvas.getContext("2d");
 
 const startButton = document.getElementById("start-button");
