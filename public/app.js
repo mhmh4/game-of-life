@@ -43,7 +43,7 @@ startButton.addEventListener("click", () => {
   intervalId = setInterval(() => {
     createNextGeneration(grid);
     drawCells(grid);
-  }, 100);
+  }, 250);
 });
 
 stopButton.addEventListener("click", () => {
