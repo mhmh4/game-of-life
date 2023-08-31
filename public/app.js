@@ -93,9 +93,9 @@ function drawCells(grid) {
         ctx.fillStyle = "#65743A";
         ctx.fill();
       } else {
-        ctx.fillStyle = "#fff";
+        ctx.fillStyle = "#2A3C24";
         ctx.fill();
-        ctx.strokeStyle = "#bbb";
+        ctx.strokeStyle = "#243010";
         ctx.stroke();
       }
     }
