@@ -65,7 +65,7 @@ canvas.addEventListener("mousemove", (event) => {
     const [x, y] = getMousePosition(event);
     console.log("clicked canvas at " + x + " " + y);
 
-    const [a, b] = getCellContainingPosition(x, y);
+    const [a, b] = indicesOfCellContainingPosition(x, y);
     let c = grid[a][b];
 
     c.makeAlive();
@@ -101,10 +101,8 @@ function drawCells(grid) {
   }
 }
 
-function getCellContainingPosition(x, y) {
-  const targetTopLeftCornerX = Math.floor(x / CELL_LENGTH);
-  const targetTopLeftCornerY = Math.floor(y / CELL_LENGTH);
-  return [targetTopLeftCornerX, targetTopLeftCornerY];
+function indicesOfCellContainingPosition(x, y) {
+  return [Math.floor(x / CELL_LENGTH), Math.floor(y / CELL_LENGTH)];
 }
 
 function getMousePosition(event) {
