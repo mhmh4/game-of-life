@@ -29,13 +29,12 @@ for (let i = 0; i < m; i++) {
 
 drawCells(grid);
 
-const copy = [];
-for (let i = 0; i < grid.length; i++) {
-  const innerArray = [];
-  for (let j = 0; j < grid[i].length; j++) {
-    innerArray.push(grid[i][j]);
+let copy = [...Array(m)].map(() => Array(n));
+
+for (let i = 0; i < m; i++) {
+  for (let j = 0; j < n; j++) {
+    copy[i][j] = new Cell();
   }
-  copy.push(innerArray);
 }
 
 startButton.addEventListener("click", () => {
@@ -146,7 +145,6 @@ function createNextGeneration(grid) {
       const isAlive = grid[i][j].isAlive();
       const aliveNeighbors = countAliveNeighborCells(grid, i, j);
 
-      copy[i][j] = new Cell();
       copy[i][j].state = grid[i][j].state;
 
       if (isAlive) {
