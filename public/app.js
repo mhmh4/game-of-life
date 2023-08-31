@@ -80,7 +80,6 @@ canvas.addEventListener("mousemove", (event) => {
 });
 
 function drawCells(grid) {
-  ctx.strokeStyle = "#bbb";
   for (let j = 0; j < grid[0].length; j++) {
     for (let i = 0; i < grid.length; i++) {
       ctx.beginPath();
@@ -92,7 +91,7 @@ function drawCells(grid) {
         j * CELL_LENGTH + CELL_LENGTH
       );
       if (cell.isAlive()) {
-        ctx.fillStyle = "#bbb";
+        ctx.fillStyle = "#65743A";
         ctx.fill();
       } else {
         ctx.fillStyle = "#fff";
