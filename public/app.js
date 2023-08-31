@@ -82,15 +82,15 @@ canvas.addEventListener("mousemove", (event) => {
 
 function drawCells(grid) {
   ctx.strokeStyle = "#bbb";
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[0].length; j++) {
+  for (let j = 0; j < grid[0].length; j++) {
+    for (let i = 0; i < grid.length; i++) {
       ctx.beginPath();
       const cell = grid[i][j];
       ctx.rect(
-        i * CELL_LENGTH,
         j * CELL_LENGTH,
-        i * CELL_LENGTH + CELL_LENGTH,
-        j * CELL_LENGTH + CELL_LENGTH
+        i * CELL_LENGTH,
+        j * CELL_LENGTH + CELL_LENGTH,
+        i * CELL_LENGTH + CELL_LENGTH
       );
       if (cell.isAlive()) {
         ctx.fillStyle = "#bbb";
@@ -108,7 +108,7 @@ function drawCells(grid) {
 function getCellContainingPosition(x, y) {
   const targetTopLeftCornerX = Math.floor(x / CELL_LENGTH) * CELL_LENGTH;
   const targetTopLeftCornerY = Math.floor(y / CELL_LENGTH) * CELL_LENGTH;
-  return [targetTopLeftCornerX, targetTopLeftCornerY];
+  return [targetTopLeftCornerY, targetTopLeftCornerX];
 }
 
 function getMousePosition(event) {
@@ -148,17 +148,18 @@ function createNextGeneration(grid) {
       const isAlive = grid[i][j].isAlive();
       const aliveNeighbors = countAliveNeighborCells(grid, i, j);
 
-      copy[i][j] = grid[i][j];
+      copy[i][j] = new Cell();
+      copy[i][j].state = grid[i][j].state;
 
       if (isAlive) {
         if (aliveNeighbors === 2 || aliveNeighbors === 3) {
           // stays alive
         } else {
-          copy[i][j].toggle();
+          copy[i][j].makeDead();
         }
       } else {
         if (aliveNeighbors === 3) {
-          copy[i][j].toggle();
+          copy[i][j].makeAlive();
         } else {
           // stays dead
         }
@@ -166,5 +167,9 @@ function createNextGeneration(grid) {
     }
   }
 
-  grid = copy.map((row) => [...row]);
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      grid[i][j].state = copy[i][j].state;
+    }
+  }
 }
