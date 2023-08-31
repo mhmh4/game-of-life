@@ -2,13 +2,16 @@ import Cell from "./cell.js";
 import { CELL_LENGTH, DELAY } from "./settings.js";
 
 const canvas = document.getElementById("canvas");
-const mouseIndicator = document.getElementById("mouse-indicator");
 const ctx = canvas.getContext("2d");
 
 const startButton = document.getElementById("start-button");
 const stopButton = document.getElementById("stop-button");
 const clearButton = document.getElementById("clear-button");
+
 const runningState = document.getElementById("running-state");
+
+const mouseIndicator = document.getElementById("mouse-indicator");
+const generationIndicator = document.getElementById("generation-indicator");
 
 console.log(canvas);
 console.log(`(width: ${canvas.clientWidth}, height: ${canvas.clientHeight})`);
@@ -41,6 +44,7 @@ startButton.addEventListener("click", () => {
   intervalId = setInterval(() => {
     createNextGeneration(grid);
     drawCells(grid);
+    generationIndicator.innerText = parseInt(generationIndicator.innerText) + 1;
   }, DELAY);
 });
 
@@ -51,6 +55,7 @@ stopButton.addEventListener("click", () => {
 
 clearButton.addEventListener("click", () => {
   stopButton.click();
+  generationIndicator.innerText = "0";
   drawCells(grid);
   for (const row of grid) {
     for (const cell of row) {
