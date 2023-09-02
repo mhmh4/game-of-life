@@ -105,12 +105,12 @@ function drawCells(grid) {
         j * CELL_LENGTH + CELL_LENGTH
       );
       if (cell.isAlive()) {
-        ctx.fillStyle = "#65743A";
+        ctx.fillStyle = "#bee5bf";
         ctx.fill();
       } else {
-        ctx.fillStyle = "#2A3C24";
+        ctx.fillStyle = "#104f55";
         ctx.fill();
-        ctx.strokeStyle = "#243010";
+        ctx.strokeStyle = "#0d4146";
         ctx.stroke();
       }
     }
