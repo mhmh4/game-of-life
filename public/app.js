@@ -53,6 +53,7 @@ for (let i = 0; i < m; i++) {
 
 startButton.addEventListener("click", () => {
   startButton.disabled = true;
+  pauseButton.disabled = false;
   runningState.innerText = "running";
   intervalId = setInterval(() => {
     createNextGeneration(grid);
@@ -66,6 +67,7 @@ startButton.addEventListener("click", () => {
 pauseButton.addEventListener("click", () => {
   clearInterval(intervalId);
   startButton.disabled = false;
+  pauseButton.disabled = true;
   runningState.innerText = "idle";
 });
 
