@@ -1,3 +1,8 @@
+// Canvas colors
+const DEAD_CELL_COLOR = "#104f55";
+const GRID_LINE_COLOR = "#0d4146";
+const LIVE_CELL_COLOR = "#bee5bf";
+
 // const CANVAS_HEIGHT = 400;
 // const CANVAS_WIDTH = 900;
 
@@ -10,4 +15,12 @@ const CANVAS_WIDTH =
 
 const DELAY = 200;
 
-export { CANVAS_HEIGHT, CANVAS_WIDTH, CELL_LENGTH, DELAY };
+export {
+  CANVAS_HEIGHT,
+  CANVAS_WIDTH,
+  CELL_LENGTH,
+  DEAD_CELL_COLOR,
+  DELAY,
+  GRID_LINE_COLOR,
+  LIVE_CELL_COLOR,
+};

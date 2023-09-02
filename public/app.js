@@ -1,5 +1,13 @@
 import Cell from "./cell.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, CELL_LENGTH, DELAY } from "./settings.js";
+import {
+  CANVAS_HEIGHT,
+  CANVAS_WIDTH,
+  CELL_LENGTH,
+  DELAY,
+  LIVE_CELL_COLOR,
+  DEAD_CELL_COLOR,
+  GRID_LINE_COLOR,
+} from "./settings.js";
 
 const canvas = document.getElementById("canvas");
 canvas.width = CANVAS_WIDTH;
@@ -105,12 +113,12 @@ function drawCells(grid) {
         j * CELL_LENGTH + CELL_LENGTH
       );
       if (cell.isAlive()) {
-        ctx.fillStyle = "#bee5bf";
+        ctx.fillStyle = LIVE_CELL_COLOR;
         ctx.fill();
       } else {
-        ctx.fillStyle = "#104f55";
+        ctx.fillStyle = DEAD_CELL_COLOR;
         ctx.fill();
-        ctx.strokeStyle = "#0d4146";
+        ctx.strokeStyle = GRID_LINE_COLOR;
         ctx.stroke();
       }
     }
