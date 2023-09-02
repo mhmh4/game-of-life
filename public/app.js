@@ -8,8 +8,8 @@ canvas.height = CANVAS_HEIGHT;
 const ctx = canvas.getContext("2d");
 
 const startButton = document.getElementById("start-button");
-const stopButton = document.getElementById("stop-button");
-const clearButton = document.getElementById("clear-button");
+const pauseButton = document.getElementById("pause-button");
+const resetButton = document.getElementById("reset-button");
 
 const runningState = document.getElementById("running-state");
 
@@ -51,13 +51,13 @@ startButton.addEventListener("click", () => {
   }, DELAY);
 });
 
-stopButton.addEventListener("click", () => {
+pauseButton.addEventListener("click", () => {
   clearInterval(intervalId);
   runningState.innerText = "idle";
 });
 
-clearButton.addEventListener("click", () => {
-  stopButton.click();
+resetButton.addEventListener("click", () => {
+  pauseButton.click();
   generationIndicator.innerText = "0";
   drawCells(grid);
   for (const row of grid) {
