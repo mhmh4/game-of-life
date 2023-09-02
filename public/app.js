@@ -46,7 +46,7 @@ startButton.addEventListener("click", () => {
   startButton.disabled = true;
   runningState.innerText = "running";
   intervalId = setInterval(() => {
-    createNextGeneration(grid);
+    let aliveCount = createNextGeneration(grid);
     drawCells(grid);
     generationIndicator.innerText = parseInt(generationIndicator.innerText) + 1;
   }, DELAY);
@@ -148,6 +148,7 @@ function countAliveNeighborCells(cells, i, j) {
 
 function createNextGeneration(grid) {
   console.log(copy);
+  let aliveCount = 0;
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
@@ -159,12 +160,14 @@ function createNextGeneration(grid) {
       if (isAlive) {
         if (aliveNeighbors === 2 || aliveNeighbors === 3) {
           // stays alive
+          aliveCount++;
         } else {
           copy[i][j].makeDead();
         }
       } else {
         if (aliveNeighbors === 3) {
           copy[i][j].makeAlive();
+          aliveCount++;
         } else {
           // stays dead
         }
@@ -177,4 +180,6 @@ function createNextGeneration(grid) {
       grid[i][j].state = copy[i][j].state;
     }
   }
+
+  return aliveCount;
 }
