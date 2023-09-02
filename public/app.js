@@ -15,6 +15,7 @@ const runningState = document.getElementById("running-state");
 
 const mouseIndicator = document.getElementById("mouse-indicator");
 const generationIndicator = document.getElementById("generation-indicator");
+const aliveCellsIndicator = document.getElementById("alive-cells-indicator");
 
 console.log(canvas);
 console.log(`(width: ${canvas.clientWidth}, height: ${canvas.clientHeight})`);
@@ -48,7 +49,7 @@ startButton.addEventListener("click", () => {
   intervalId = setInterval(() => {
     createNextGeneration(grid);
     let aliveCount = countAliveCells(grid);
-    console.log(aliveCount);
+    aliveCellsIndicator.innerText = aliveCount;
     drawCells(grid);
     generationIndicator.innerText = parseInt(generationIndicator.innerText) + 1;
   }, DELAY);
@@ -62,8 +63,9 @@ pauseButton.addEventListener("click", () => {
 
 resetButton.addEventListener("click", () => {
   pauseButton.click();
-  generationIndicator.innerText = "0";
   drawCells(grid);
+  generationIndicator.innerText = "0";
+  aliveCellsIndicator.innerHTML = "0";
   for (const row of grid) {
     for (const cell of row) {
       cell.makeDead();
@@ -87,6 +89,8 @@ canvas.addEventListener("mousemove", (event) => {
 
 canvas.addEventListener("mousemove", (event) => {
   mouseIndicator.innerText = getMousePosition(event);
+  let aliveCount = countAliveCells(grid);
+  aliveCellsIndicator.innerText = aliveCount;
 });
 
 function drawCells(grid) {
