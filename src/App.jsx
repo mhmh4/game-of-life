@@ -5,7 +5,13 @@ function Cell() {
 
   return (
     <>
-      <span>cell</span>
+      <div
+        className={`inline-flex w-8 border border-slate-500 ${
+          isAlive ? "bg-slate-500" : "bg-white"
+        }`}
+      >
+        &nbsp;
+      </div>
     </>
   );
 }
