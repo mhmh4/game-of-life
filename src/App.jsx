@@ -1,11 +1,9 @@
 import { useState } from "react";
 
-function Cell() {
-  const [isAlive, setIsAlive] = useState(false);
-
-  function handleClick() {
-    setIsAlive(true);
-  }
+function Cell({ isAlive }) {
+  // function handleClick() {
+  //   setIsAlive(true);
+  // }
 
   return (
     <>
@@ -13,7 +11,7 @@ function Cell() {
         className={`inline-flex w-8 border border-slate-500 select-none ${
           isAlive ? "bg-slate-500" : "bg-white"
         }`}
-        onClick={handleClick}
+        // onClick={handleClick}
       >
         &nbsp;
       </div>
@@ -40,7 +38,7 @@ function Grid() {
         return (
           <div>
             {row.map((isAlive) => {
-              return <Cell />;
+              return <Cell isAlive={isAlive} />;
             })}
           </div>
         );
