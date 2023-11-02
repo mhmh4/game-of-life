@@ -37,7 +37,13 @@ function Grid() {
   return (
     <>
       {grid.map((row) => {
-        return <div>{row}</div>;
+        return (
+          <div>
+            {row.map((isAlive) => {
+              return <Cell />;
+            })}
+          </div>
+        );
       })}
     </>
   );
