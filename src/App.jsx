@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Cell({ isAlive }) {
+function Cell({ isAlive, onCellClick }) {
   // function handleClick() {
   //   setIsAlive(true);
   // }
@@ -11,7 +11,7 @@ function Cell({ isAlive }) {
         className={`inline-flex w-8 border border-slate-500 select-none ${
           isAlive ? "bg-slate-500" : "bg-white"
         }`}
-        // onClick={handleClick}
+        onClick={onCellClick}
       >
         &nbsp;
       </div>
@@ -32,13 +32,19 @@ function Grid() {
     return array;
   });
 
+  function handleClick(i, j) {
+    console.log(i, j);
+  }
+
   return (
     <>
-      {grid.map((row) => {
+      {grid.map((row, i) => {
         return (
           <div>
-            {row.map((isAlive) => {
-              return <Cell isAlive={isAlive} />;
+            {row.map((isAlive, j) => {
+              return (
+                <Cell isAlive={isAlive} onCellClick={() => handleClick(i, j)} />
+              );
             })}
           </div>
         );
