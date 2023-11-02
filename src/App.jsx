@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Cell({ isAlive, onCellClick }) {
   // function handleClick() {
@@ -37,6 +37,16 @@ function Grid() {
     newGrid[i][j] = true;
     setGrid(newGrid);
   }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log("test");
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <>
