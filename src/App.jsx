@@ -5,7 +5,11 @@ function Cell() {
 
   return (
     <>
-      <div>cell</div>
+      <span>cell</span>
+    </>
+  );
+}
+
     </>
   );
 }
