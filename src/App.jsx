@@ -33,7 +33,9 @@ function Grid() {
   });
 
   function handleClick(i, j) {
-    console.log(i, j);
+    const newGrid = structuredClone(grid);
+    newGrid[i][j] = true;
+    setGrid(newGrid);
   }
 
   return (
