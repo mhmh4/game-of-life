@@ -9,7 +9,7 @@ function Cell({ isAlive, onCellClick }) {
     <>
       <div
         className={`inline-flex w-8 border border-slate-500 select-none ${
-          isAlive ? "bg-slate-500" : "bg-white"
+          isAlive ? "bg-slate-500" : "bg-white hover:bg-slate-200"
         }`}
         onClick={onCellClick}
       >
