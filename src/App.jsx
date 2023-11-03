@@ -104,6 +104,14 @@ function Grid() {
           </div>
         );
       })}
+      <button
+        type="button"
+        onClick={() => {
+          setIsRunning(true);
+        }}
+      >
+        start
+      </button>
     </>
   );
 }
