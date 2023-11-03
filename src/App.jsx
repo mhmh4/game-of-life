@@ -7,14 +7,12 @@ function Cell({ isAlive, onCellClick }) {
 
   return (
     <>
-      <div
-        className={`inline-flex w-8 border border-slate-500 select-none ${
+      <span
+        className={`w-8 h-8 border border-slate-500 select-none ${
           isAlive ? "bg-slate-500" : "bg-white hover:bg-slate-200"
         }`}
         onClick={onCellClick}
-      >
-        &nbsp;
-      </div>
+      ></span>
     </>
   );
 }
@@ -24,9 +22,9 @@ function Grid() {
 
   const [grid, setGrid] = useState(() => {
     const array = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 15; i++) {
       const row = [];
-      for (let j = 0; j < 10; j++) {
+      for (let j = 0; j < 15; j++) {
         row.push(false);
       }
       array.push(row);
@@ -110,7 +108,7 @@ function Grid() {
     <>
       {grid.map((row, i) => {
         return (
-          <div key={i}>
+          <div key={i} className="flex">
             {row.map((isAlive, j) => {
               return (
                 <Cell
