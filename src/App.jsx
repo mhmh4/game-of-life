@@ -52,10 +52,14 @@ function Grid() {
     <>
       {grid.map((row, i) => {
         return (
-          <div>
+          <div key={i}>
             {row.map((isAlive, j) => {
               return (
-                <Cell isAlive={isAlive} onCellClick={() => handleClick(i, j)} />
+                <Cell
+                  key={j}
+                  isAlive={isAlive}
+                  onCellClick={() => handleClick(i, j)}
+                />
               );
             })}
           </div>
