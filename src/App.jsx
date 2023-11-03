@@ -68,13 +68,18 @@ function Grid() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("test");
+      for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[i].length; j++) {
+          const aliveNeighbors = countAliveNeighbors(i, j);
+          console.log(i, j, aliveNeighbors);
+        }
+      }
     }, 1000);
 
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [grid]);
 
   return (
     <>
