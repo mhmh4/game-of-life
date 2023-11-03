@@ -59,9 +59,11 @@ function Grid() {
   }
 
   function handleClick(i, j) {
-    const newGrid = structuredClone(grid);
-    newGrid[i][j] = true;
-    setGrid(newGrid);
+    setGrid((curGrid) => {
+      const newGrid = structuredClone(curGrid);
+      newGrid[i][j] = true;
+      return newGrid;
+    });
   }
 
   useEffect(() => {
