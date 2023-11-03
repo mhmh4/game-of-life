@@ -36,7 +36,7 @@ function Grid() {
     return i >= 0 && i < grid.length && j >= 0 && j < grid[i].length;
   }
 
-  function countNeighbors(i, j) {
+  function countAliveNeighbors(i, j) {
     let count = 0;
 
     for (const x of [-1, 0, 1]) {
