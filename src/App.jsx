@@ -74,12 +74,31 @@ function Grid() {
     }
 
     const interval = setInterval(() => {
-      for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid[i].length; j++) {
-          const aliveNeighbors = countAliveNeighbors(i, j);
-          console.log(i, j, aliveNeighbors);
+      setGrid((curGrid) => {
+        const newGrid = structuredClone(curGrid);
+        for (let i = 0; i < grid.length; i++) {
+          for (let j = 0; j < grid[i].length; j++) {
+            const aliveNeighbors = countAliveNeighbors(i, j);
+            const isAlive = grid[i][j];
+            console.log(i, j, aliveNeighbors);
+            if (isAlive) {
+              if (aliveNeighbors === 2 || aliveNeighbors == 3) {
+                newGrid[i][j] = true;
+              } else {
+                newGrid[i][j] = false;
+              }
+            } else {
+              if (aliveNeighbors === 3) {
+                newGrid[i][j] = true;
+              } else {
+                newGrid[i][j] = false;
+              }
+            }
+          }
         }
-      }
+
+        return newGrid;
+      });
     }, 1000);
 
     return () => {
