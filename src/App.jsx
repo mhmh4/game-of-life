@@ -32,6 +32,32 @@ function Grid() {
     return array;
   });
 
+  function isValidIndex(i, j) {
+    return i >= 0 && i < grid.length && j >= 0 && j < grid[i].length;
+  }
+
+  function countNeighbors(i, j) {
+    let count = 0;
+
+    for (const x of [-1, 0, 1]) {
+      for (const y of [-1, 0, 1]) {
+        if (x === 0 && y === 0) {
+          continue;
+        }
+        const neighborI = i + x;
+        const neighborJ = j + y;
+        if (!isValidIndex(neighborI, neighborJ)) {
+          continue;
+        }
+        if (grid[neighborI][neighborJ]) {
+          count++;
+        }
+      }
+    }
+
+    return count;
+  }
+
   function handleClick(i, j) {
     const newGrid = structuredClone(grid);
     newGrid[i][j] = true;
