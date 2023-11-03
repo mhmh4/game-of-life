@@ -20,6 +20,8 @@ function Cell({ isAlive, onCellClick }) {
 }
 
 function Grid() {
+  const [isRunning, setIsRunning] = useState(false);
+
   const [grid, setGrid] = useState(() => {
     const array = [];
     for (let i = 0; i < 10; i++) {
@@ -67,6 +69,10 @@ function Grid() {
   }
 
   useEffect(() => {
+    if (!isRunning) {
+      return;
+    }
+
     const interval = setInterval(() => {
       for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid[i].length; j++) {
@@ -79,7 +85,7 @@ function Grid() {
     return () => {
       clearInterval(interval);
     };
-  }, [grid]);
+  }, [grid, isRunning]);
 
   return (
     <>
