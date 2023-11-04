@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 
 function Cell({ isAlive, onCellClick }) {
-  // function handleClick() {
-  //   setIsAlive(true);
-  // }
-
   return (
     <>
       <span
@@ -22,7 +18,7 @@ function Cell({ isAlive, onCellClick }) {
   );
 }
 
-function Grid({ isRunning, setIsRunning, grid, setGrid }) {
+function Grid({ isRunning, grid, setGrid }) {
   function isValidIndex(i, j) {
     return i >= 0 && i < grid.length && j >= 0 && j < grid[i].length;
   }
@@ -133,12 +129,7 @@ export default function App() {
 
   return (
     <>
-      <Grid
-        isRunning={isRunning}
-        setIsRunning={setIsRunning}
-        grid={grid}
-        setGrid={setGrid}
-      />
+      <Grid isRunning={isRunning} grid={grid} setGrid={setGrid} />
       <button
         type="button"
         onClick={() => {
