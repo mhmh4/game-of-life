@@ -4,7 +4,7 @@ function Cell({ isAlive, onCellClick }) {
   return (
     <>
       <span
-        className={`w-8 h-8 border border-slate-500 select-none ${
+        className={`w-6 h-6 border border-slate-500 select-none ${
           isAlive ? "bg-slate-500" : "bg-white hover:bg-slate-200"
         }`}
         onClick={onCellClick}
@@ -117,9 +117,9 @@ export default function App() {
 
   const [grid, setGrid] = useState(() => {
     const array = [];
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 20; i++) {
       const row = [];
-      for (let j = 0; j < 15; j++) {
+      for (let j = 0; j < 45; j++) {
         row.push(false);
       }
       array.push(row);
