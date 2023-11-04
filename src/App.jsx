@@ -134,6 +134,14 @@ function Grid() {
       >
         start
       </button>
+      <button
+        type="button"
+        onClick={() => {
+          setIsRunning(false);
+        }}
+      >
+        pause
+      </button>
     </>
   );
 }
