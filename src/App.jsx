@@ -112,6 +112,33 @@ function Grid({ isRunning, setIsRunning, grid, setGrid }) {
           </div>
         );
       })}
+    </>
+  );
+}
+
+export default function App() {
+  const [isRunning, setIsRunning] = useState(false);
+
+  const [grid, setGrid] = useState(() => {
+    const array = [];
+    for (let i = 0; i < 15; i++) {
+      const row = [];
+      for (let j = 0; j < 15; j++) {
+        row.push(false);
+      }
+      array.push(row);
+    }
+    return array;
+  });
+
+  return (
+    <>
+      <Grid
+        isRunning={isRunning}
+        setIsRunning={setIsRunning}
+        grid={grid}
+        setGrid={setGrid}
+      />
       <button
         type="button"
         onClick={() => {
@@ -147,33 +174,6 @@ function Grid({ isRunning, setIsRunning, grid, setGrid }) {
       >
         reset
       </button>
-    </>
-  );
-}
-
-export default function App() {
-  const [isRunning, setIsRunning] = useState(false);
-
-  const [grid, setGrid] = useState(() => {
-    const array = [];
-    for (let i = 0; i < 15; i++) {
-      const row = [];
-      for (let j = 0; j < 15; j++) {
-        row.push(false);
-      }
-      array.push(row);
-    }
-    return array;
-  });
-
-  return (
-    <>
-      <Grid
-        isRunning={isRunning}
-        setIsRunning={setIsRunning}
-        grid={grid}
-        setGrid={setGrid}
-      />
     </>
   );
 }
