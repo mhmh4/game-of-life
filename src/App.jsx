@@ -22,9 +22,7 @@ function Cell({ isAlive, onCellClick }) {
   );
 }
 
-function Grid() {
-  const [isRunning, setIsRunning] = useState(false);
-
+function Grid({ isRunning, setIsRunning }) {
   const [grid, setGrid] = useState(() => {
     const array = [];
     for (let i = 0; i < 15; i++) {
@@ -166,9 +164,11 @@ function Grid() {
 }
 
 export default function App() {
+  const [isRunning, setIsRunning] = useState(false);
+
   return (
     <>
-      <Grid />
+      <Grid isRunning={isRunning} setIsRunning={setIsRunning} />
     </>
   );
 }
