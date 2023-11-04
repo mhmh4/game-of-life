@@ -152,9 +152,9 @@ export default function App() {
           setIsRunning(false);
           setGrid(() => {
             const array = [];
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < grid.length; i++) {
               const row = [];
-              for (let j = 0; j < 15; j++) {
+              for (let j = 0; j < grid[i].length; j++) {
                 row.push(false);
               }
               array.push(row);
