@@ -22,19 +22,7 @@ function Cell({ isAlive, onCellClick }) {
   );
 }
 
-function Grid({ isRunning, setIsRunning }) {
-  const [grid, setGrid] = useState(() => {
-    const array = [];
-    for (let i = 0; i < 15; i++) {
-      const row = [];
-      for (let j = 0; j < 15; j++) {
-        row.push(false);
-      }
-      array.push(row);
-    }
-    return array;
-  });
-
+function Grid({ isRunning, setIsRunning, grid, setGrid }) {
   function isValidIndex(i, j) {
     return i >= 0 && i < grid.length && j >= 0 && j < grid[i].length;
   }
@@ -166,9 +154,26 @@ function Grid({ isRunning, setIsRunning }) {
 export default function App() {
   const [isRunning, setIsRunning] = useState(false);
 
+  const [grid, setGrid] = useState(() => {
+    const array = [];
+    for (let i = 0; i < 15; i++) {
+      const row = [];
+      for (let j = 0; j < 15; j++) {
+        row.push(false);
+      }
+      array.push(row);
+    }
+    return array;
+  });
+
   return (
     <>
-      <Grid isRunning={isRunning} setIsRunning={setIsRunning} />
+      <Grid
+        isRunning={isRunning}
+        setIsRunning={setIsRunning}
+        grid={grid}
+        setGrid={setGrid}
+      />
     </>
   );
 }
