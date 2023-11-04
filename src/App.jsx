@@ -100,7 +100,7 @@ function Grid({ isRunning, setIsRunning }) {
 
         return newGrid;
       });
-    }, 1000);
+    }, 500);
 
     return () => {
       clearInterval(interval);
