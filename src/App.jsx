@@ -12,6 +12,11 @@ function Cell({ isAlive, onCellClick }) {
           isAlive ? "bg-slate-500" : "bg-white hover:bg-slate-200"
         }`}
         onClick={onCellClick}
+        onMouseMove={(event) => {
+          if (event.buttons == 1) {
+            onCellClick();
+          }
+        }}
       ></span>
     </>
   );
