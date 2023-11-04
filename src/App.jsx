@@ -142,6 +142,25 @@ function Grid() {
       >
         pause
       </button>
+      <button
+        type="button"
+        onClick={() => {
+          setIsRunning(false);
+          setGrid(() => {
+            const array = [];
+            for (let i = 0; i < 15; i++) {
+              const row = [];
+              for (let j = 0; j < 15; j++) {
+                row.push(false);
+              }
+              array.push(row);
+            }
+            return array;
+          });
+        }}
+      >
+        reset
+      </button>
     </>
   );
 }
