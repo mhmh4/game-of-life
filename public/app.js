@@ -25,9 +25,6 @@ const mouseIndicator = document.getElementById("mouse-indicator");
 const generationIndicator = document.getElementById("generation-indicator");
 const aliveCellsIndicator = document.getElementById("alive-cells-indicator");
 
-console.log(canvas);
-console.log(`(width: ${canvas.clientWidth}, height: ${canvas.clientHeight})`);
-
 const m = canvas.clientWidth / CELL_LENGTH;
 const n = canvas.clientHeight / CELL_LENGTH;
 
@@ -87,7 +84,6 @@ resetButton.addEventListener("click", () => {
 canvas.addEventListener("mousemove", (event) => {
   if (event.buttons == 1) {
     const [x, y] = getMousePosition(event);
-    console.log("clicked canvas at " + x + " " + y);
 
     const [a, b] = indicesOfCellContainingPosition(x, y);
     let c = grid[a][b];
@@ -163,8 +159,6 @@ function countAliveNeighborCells(cells, i, j) {
 }
 
 function createNextGeneration(grid) {
-  console.log(copy);
-
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
       const isAlive = grid[i][j].isAlive();
