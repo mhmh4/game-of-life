@@ -30,8 +30,8 @@ const n = canvas.clientHeight / CELL_LENGTH;
 
 let intervalId;
 
-let grid = [...Array(m)].map(() => Array(n).fill(0));
-let copy = structuredClone(grid);
+const grid = [...Array(m)].map(() => Array(n).fill(0));
+const copy = structuredClone(grid);
 
 drawCells(grid);
 
@@ -76,17 +76,14 @@ randomizeButton.addEventListener("click", () => {
       grid[i][j] = Math.random() < 0.5 ? 1 : 0;
     }
   }
-
   drawCells(grid);
 });
 
 canvas.addEventListener("mousemove", (event) => {
-  if (event.buttons == 1) {
+  if (event.buttons === 1) {
     const [x, y] = getMousePosition(event);
-
     const [a, b] = indicesOfCellContainingPosition(x, y);
     grid[a][b] = 1;
-
     drawCells(grid);
   }
 });
@@ -98,26 +95,26 @@ canvas.addEventListener("mousemove", (event) => {
 });
 
 function drawCells(grid) {
+  let x = 0;
+  let y = 0;
+
   for (let j = 0; j < n; j++) {
+    x = 0;
     for (let i = 0; i < m; i++) {
       ctx.beginPath();
-      const cell = grid[i][j];
-      ctx.rect(
-        i * CELL_LENGTH,
-        j * CELL_LENGTH,
-        i * CELL_LENGTH + CELL_LENGTH,
-        j * CELL_LENGTH + CELL_LENGTH
-      );
-      if (cell === 1) {
+      ctx.rect(x, y, CELL_LENGTH, CELL_LENGTH);
+      if (grid[i][j] === 1) {
         ctx.fillStyle = LIVE_CELL_COLOR;
         ctx.fill();
       } else {
         ctx.fillStyle = DEAD_CELL_COLOR;
         ctx.fill();
-        ctx.strokeStyle = GRID_LINE_COLOR;
-        ctx.stroke();
       }
+      ctx.strokeStyle = GRID_LINE_COLOR;
+      ctx.stroke();
+      x += CELL_LENGTH;
     }
+    y += CELL_LENGTH;
   }
 }
 
@@ -136,19 +133,21 @@ function getMousePosition(event) {
   return [x, y];
 }
 
-function countAliveNeighborCells(cells, i, j) {
+function countAliveNeighbors(grid, i, j) {
   const d = [-1, 0, 1];
   let count = 0;
   for (const x of d) {
     for (const y of d) {
-      if (x === 0 && y === 0) continue;
+      if (x === 0 && y === 0) {
+        continue;
+      }
       const dx = i + x;
       const dy = j + y;
-      const isInvalidPosition = dx < 0 || dx == m || dy < 0 || dy == n;
+      const isInvalidPosition = dx < 0 || dx === m || dy < 0 || dy === n;
       if (isInvalidPosition) {
         continue;
       }
-      if (cells[dx][dy] === 1) {
+      if (grid[dx][dy] === 1) {
         count++;
       }
     }
@@ -159,12 +158,9 @@ function countAliveNeighborCells(cells, i, j) {
 function createNextGeneration(grid) {
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      const isAlive = grid[i][j] === 1;
-      const aliveNeighbors = countAliveNeighborCells(grid, i, j);
+      const aliveNeighbors = countAliveNeighbors(grid, i, j);
 
-      copy[i][j] = grid[i][j];
-
-      if (isAlive) {
+      if (grid[i][j] === 1) {
         if (aliveNeighbors === 2 || aliveNeighbors === 3) {
           // stays alive
         } else {
