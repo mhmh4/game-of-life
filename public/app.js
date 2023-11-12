@@ -90,7 +90,7 @@ canvas.addEventListener("mousemove", (event) => {
     const [a, b] = indicesOfCellContainingPosition(x, y);
     let c = grid[a][b];
 
-    c.makeAlive();
+    c.state = 1;
     drawCells(grid);
   }
 });
@@ -112,7 +112,7 @@ function drawCells(grid) {
         i * CELL_LENGTH + CELL_LENGTH,
         j * CELL_LENGTH + CELL_LENGTH
       );
-      if (cell.isAlive()) {
+      if (cell.state === 1) {
         ctx.fillStyle = LIVE_CELL_COLOR;
         ctx.fill();
       } else {
@@ -152,7 +152,7 @@ function countAliveNeighborCells(cells, i, j) {
       if (isInvalidPosition) {
         continue;
       }
-      if (cells[dx][dy].isAlive()) {
+      if (cells[dx][dy].state === 1) {
         count++;
       }
     }
@@ -163,7 +163,7 @@ function countAliveNeighborCells(cells, i, j) {
 function createNextGeneration(grid) {
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      const isAlive = grid[i][j].isAlive();
+      const isAlive = grid[i][j].state === 1;
       const aliveNeighbors = countAliveNeighborCells(grid, i, j);
 
       copy[i][j].state = grid[i][j].state;
@@ -172,11 +172,11 @@ function createNextGeneration(grid) {
         if (aliveNeighbors === 2 || aliveNeighbors === 3) {
           // stays alive
         } else {
-          copy[i][j].makeDead();
+          copy[i][j].state = 0;
         }
       } else {
         if (aliveNeighbors === 3) {
-          copy[i][j].makeAlive();
+          copy[i][j].state = 1;
         } else {
           // stays dead
         }
@@ -195,7 +195,7 @@ function countAliveCells(grid) {
   let count = 0;
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      if (grid[i][j].isAlive()) {
+      if (grid[i][j].state === 1) {
         count++;
       }
     }
