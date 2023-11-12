@@ -1,4 +1,3 @@
-import Cell from "./cell.js";
 import {
   CANVAS_HEIGHT,
   CANVAS_WIDTH,
@@ -30,23 +29,10 @@ const n = canvas.clientHeight / CELL_LENGTH;
 
 let intervalId;
 
-let grid = [...Array(m)].map(() => Array(n));
-
-for (let i = 0; i < m; i++) {
-  for (let j = 0; j < n; j++) {
-    grid[i][j] = new Cell();
-  }
-}
+let grid = [...Array(m)].map(() => Array(n).fill(0));
+let copy = structuredClone(grid);
 
 drawCells(grid);
-
-let copy = [...Array(m)].map(() => Array(n));
-
-for (let i = 0; i < m; i++) {
-  for (let j = 0; j < n; j++) {
-    copy[i][j] = new Cell();
-  }
-}
 
 startButton.addEventListener("click", () => {
   startButton.disabled = true;
@@ -76,7 +62,7 @@ resetButton.addEventListener("click", () => {
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      grid[i][j].state = 0;
+      grid[i][j] = 0;
     }
   }
 
@@ -88,7 +74,7 @@ canvas.addEventListener("mousemove", (event) => {
     const [x, y] = getMousePosition(event);
 
     const [a, b] = indicesOfCellContainingPosition(x, y);
-    grid[a][b].state = 1;
+    grid[a][b] = 1;
 
     drawCells(grid);
   }
@@ -111,7 +97,7 @@ function drawCells(grid) {
         i * CELL_LENGTH + CELL_LENGTH,
         j * CELL_LENGTH + CELL_LENGTH
       );
-      if (cell.state === 1) {
+      if (cell === 1) {
         ctx.fillStyle = LIVE_CELL_COLOR;
         ctx.fill();
       } else {
@@ -151,7 +137,7 @@ function countAliveNeighborCells(cells, i, j) {
       if (isInvalidPosition) {
         continue;
       }
-      if (cells[dx][dy].state === 1) {
+      if (cells[dx][dy] === 1) {
         count++;
       }
     }
@@ -162,20 +148,20 @@ function countAliveNeighborCells(cells, i, j) {
 function createNextGeneration(grid) {
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      const isAlive = grid[i][j].state === 1;
+      const isAlive = grid[i][j] === 1;
       const aliveNeighbors = countAliveNeighborCells(grid, i, j);
 
-      copy[i][j].state = grid[i][j].state;
+      copy[i][j] = grid[i][j];
 
       if (isAlive) {
         if (aliveNeighbors === 2 || aliveNeighbors === 3) {
           // stays alive
         } else {
-          copy[i][j].state = 0;
+          copy[i][j] = 0;
         }
       } else {
         if (aliveNeighbors === 3) {
-          copy[i][j].state = 1;
+          copy[i][j] = 1;
         } else {
           // stays dead
         }
@@ -185,7 +171,7 @@ function createNextGeneration(grid) {
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      grid[i][j].state = copy[i][j].state;
+      grid[i][j] = copy[i][j];
     }
   }
 }
@@ -194,7 +180,7 @@ function countAliveCells(grid) {
   let count = 0;
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      if (grid[i][j].state === 1) {
+      if (grid[i][j] === 1) {
         count++;
       }
     }
