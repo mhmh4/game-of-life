@@ -73,11 +73,13 @@ resetButton.addEventListener("click", () => {
   drawCells(grid);
   generationIndicator.innerText = "0";
   aliveCellsIndicator.innerHTML = "0";
-  for (const row of grid) {
-    for (const cell of row) {
-      cell.makeDead();
+
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      grid[i][j].state = 0;
     }
   }
+
   drawCells(grid);
 });
 
