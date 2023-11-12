@@ -88,9 +88,8 @@ canvas.addEventListener("mousemove", (event) => {
     const [x, y] = getMousePosition(event);
 
     const [a, b] = indicesOfCellContainingPosition(x, y);
-    let c = grid[a][b];
+    grid[a][b].state = 1;
 
-    c.state = 1;
     drawCells(grid);
   }
 });
