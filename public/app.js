@@ -17,6 +17,7 @@ const ctx = canvas.getContext("2d");
 const startButton = document.getElementById("start-button");
 const pauseButton = document.getElementById("pause-button");
 const resetButton = document.getElementById("reset-button");
+const randomizeButton = document.getElementById("random-button");
 
 const runningState = document.getElementById("running-state");
 
@@ -63,6 +64,16 @@ resetButton.addEventListener("click", () => {
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
       grid[i][j] = 0;
+    }
+  }
+
+  drawCells(grid);
+});
+
+randomizeButton.addEventListener("click", () => {
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      grid[i][j] = Math.random() < 0.5 ? 1 : 0;
     }
   }
 
