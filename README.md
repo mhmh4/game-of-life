@@ -1,4 +1,4 @@
-# GOL
+# game-of-life
 
 <img src="./images/screenshot.png">
 
