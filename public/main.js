@@ -79,6 +79,13 @@ randomizeButton.addEventListener("click", () => {
   drawCells(grid);
 });
 
+canvas.addEventListener("click", (event) => {
+  const [x, y] = getMousePosition(event);
+  const [a, b] = indicesOfCellContainingPosition(x, y);
+  grid[a][b] = 1;
+  drawCells(grid);
+});
+
 canvas.addEventListener("mousemove", (event) => {
   if (event.buttons === 1) {
     const [x, y] = getMousePosition(event);
