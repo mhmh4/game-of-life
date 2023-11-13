@@ -25,8 +25,8 @@ const mouseIndicator = document.getElementById("mouse-indicator");
 const generationIndicator = document.getElementById("generation-indicator");
 const aliveCellsIndicator = document.getElementById("alive-cells-indicator");
 
-const m = canvas.clientWidth / CELL_LENGTH;
-const n = canvas.clientHeight / CELL_LENGTH;
+const m = canvas.width / CELL_LENGTH;
+const n = canvas.height / CELL_LENGTH;
 
 let intervalId;
 

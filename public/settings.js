@@ -1,3 +1,5 @@
+const canvas = document.getElementById("canvas");
+
 // Canvas colors
 const DEAD_CELL_COLOR = "#104f55";
 const GRID_LINE_COLOR = "#0d4146";
@@ -9,9 +11,8 @@ const LIVE_CELL_COLOR = "#bee5bf";
 const CELL_LENGTH = 20;
 
 const CANVAS_HEIGHT =
-  Math.ceil((window.innerHeight * 0.8) / CELL_LENGTH) * CELL_LENGTH;
-const CANVAS_WIDTH =
-  Math.ceil((window.innerWidth * 0.96) / CELL_LENGTH) * CELL_LENGTH;
+  Math.ceil(canvas.clientHeight / CELL_LENGTH) * CELL_LENGTH;
+const CANVAS_WIDTH = Math.ceil(canvas.clientWidth / CELL_LENGTH) * CELL_LENGTH;
 
 const DELAY = 200;
 
