@@ -78,16 +78,16 @@ randomizeButton.addEventListener("click", handleRandomizeButtonInteraction);
 document.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "1":
-      handleStartButtonInteraction();
+      startButton.click();
       break;
     case "2":
-      handlePauseButtonInteraction();
+      pauseButton.click();
       break;
     case "3":
-      handleResetButtonInteraction();
+      resetButton.click();
       break;
     case "4":
-      handleRandomizeButtonInteraction();
+      randomizeButton.click();
       break;
   }
 });
