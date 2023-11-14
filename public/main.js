@@ -31,7 +31,7 @@ const copy = structuredClone(grid);
 
 drawCells(grid);
 
-startButton.addEventListener("click", () => {
+function handleStartButtonInteraction() {
   startButton.disabled = true;
   pauseButton.disabled = false;
   runningState.innerText = "running";
@@ -39,16 +39,16 @@ startButton.addEventListener("click", () => {
     createNextGeneration(grid);
     drawCells(grid);
   }, DELAY);
-});
+}
 
-pauseButton.addEventListener("click", () => {
+function handlePauseButtonInteraction() {
   clearInterval(intervalId);
   startButton.disabled = false;
   pauseButton.disabled = true;
   runningState.innerText = "idle";
-});
+}
 
-resetButton.addEventListener("click", () => {
+function handleResetButtonInteraction() {
   pauseButton.click();
   drawCells(grid);
 
@@ -59,16 +59,21 @@ resetButton.addEventListener("click", () => {
   }
 
   drawCells(grid);
-});
+}
 
-randomizeButton.addEventListener("click", () => {
+function handleRandomizeButtonInteraction() {
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
       grid[i][j] = Math.random() < 0.5 ? 1 : 0;
     }
   }
   drawCells(grid);
-});
+}
+
+startButton.addEventListener("click", handleStartButtonInteraction);
+pauseButton.addEventListener("click", handlePauseButtonInteraction);
+resetButton.addEventListener("click", handleResetButtonInteraction);
+randomizeButton.addEventListener("click", handleRandomizeButtonInteraction);
 
 canvas.addEventListener("click", (event) => {
   const [x, y] = getMousePosition(event);
