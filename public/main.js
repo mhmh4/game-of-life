@@ -20,7 +20,6 @@ const resetButton = document.getElementById("reset-button");
 const randomizeButton = document.getElementById("random-button");
 
 const runningState = document.getElementById("running-state");
-const mouseIndicator = document.getElementById("mouse-indicator");
 
 const m = canvas.width / CELL_LENGTH;
 const n = canvas.height / CELL_LENGTH;
@@ -84,10 +83,6 @@ canvas.addEventListener("mousemove", (event) => {
     grid[a][b] = 1;
     drawCells(grid);
   }
-});
-
-canvas.addEventListener("mousemove", (event) => {
-  mouseIndicator.innerText = getMousePosition(event);
 });
 
 function drawCells(grid) {
