@@ -50,11 +50,11 @@ function handlePauseButtonInteraction() {
 
 function handleResetButtonInteraction() {
   pauseButton.click();
-  drawCells(grid);
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
       grid[i][j] = 0;
+      copy[i][j] = 0;
     }
   }
 
