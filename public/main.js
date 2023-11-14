@@ -75,6 +75,23 @@ pauseButton.addEventListener("click", handlePauseButtonInteraction);
 resetButton.addEventListener("click", handleResetButtonInteraction);
 randomizeButton.addEventListener("click", handleRandomizeButtonInteraction);
 
+document.addEventListener("keydown", (event) => {
+  switch (event.key) {
+    case "1":
+      handleStartButtonInteraction();
+      break;
+    case "2":
+      handlePauseButtonInteraction();
+      break;
+    case "3":
+      handleResetButtonInteraction();
+      break;
+    case "4":
+      handleRandomizeButtonInteraction();
+      break;
+  }
+});
+
 canvas.addEventListener("click", (event) => {
   const [x, y] = getMousePosition(event);
   const [a, b] = indicesOfCellContainingPosition(x, y);
