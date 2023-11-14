@@ -20,9 +20,7 @@ const resetButton = document.getElementById("reset-button");
 const randomizeButton = document.getElementById("random-button");
 
 const runningState = document.getElementById("running-state");
-
 const mouseIndicator = document.getElementById("mouse-indicator");
-const aliveCellsIndicator = document.getElementById("alive-cells-indicator");
 
 const m = canvas.width / CELL_LENGTH;
 const n = canvas.height / CELL_LENGTH;
@@ -40,8 +38,6 @@ startButton.addEventListener("click", () => {
   runningState.innerText = "running";
   intervalId = setInterval(() => {
     createNextGeneration(grid);
-    let aliveCount = countAliveCells(grid);
-    aliveCellsIndicator.innerText = aliveCount;
     drawCells(grid);
   }, DELAY);
 });
@@ -56,7 +52,6 @@ pauseButton.addEventListener("click", () => {
 resetButton.addEventListener("click", () => {
   pauseButton.click();
   drawCells(grid);
-  aliveCellsIndicator.innerHTML = "0";
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
@@ -80,7 +75,6 @@ canvas.addEventListener("click", (event) => {
   const [x, y] = getMousePosition(event);
   const [a, b] = indicesOfCellContainingPosition(x, y);
   grid[a][b] = 1;
-  drawCells(grid);
 });
 
 canvas.addEventListener("mousemove", (event) => {
@@ -94,8 +88,6 @@ canvas.addEventListener("mousemove", (event) => {
 
 canvas.addEventListener("mousemove", (event) => {
   mouseIndicator.innerText = getMousePosition(event);
-  let aliveCount = countAliveCells(grid);
-  aliveCellsIndicator.innerText = aliveCount;
 });
 
 function drawCells(grid) {
@@ -185,16 +177,4 @@ function createNextGeneration(grid) {
       grid[i][j] = copy[i][j];
     }
   }
-}
-
-function countAliveCells(grid) {
-  let count = 0;
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
-      if (grid[i][j] === 1) {
-        count++;
-      }
-    }
-  }
-  return count;
 }
