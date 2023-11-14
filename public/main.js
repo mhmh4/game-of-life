@@ -34,7 +34,7 @@ drawCells(grid);
 function handleStartButtonInteraction() {
   startButton.disabled = true;
   pauseButton.disabled = false;
-  runningState.innerText = "running";
+  runningState.innerText = "Running";
   intervalId = setInterval(() => {
     createNextGeneration(grid);
     drawCells(grid);
@@ -45,7 +45,7 @@ function handlePauseButtonInteraction() {
   clearInterval(intervalId);
   startButton.disabled = false;
   pauseButton.disabled = true;
-  runningState.innerText = "idle";
+  runningState.innerText = "Idle";
 }
 
 function handleResetButtonInteraction() {

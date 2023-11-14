@@ -10,28 +10,31 @@
 <body class="min-h-screen">
   <canvas id="canvas" class="w-full h-[90vh]"></canvas>
   <div class="bg-[#222] h-[10vh] py-2 px-2 flex select-none">
-    <div id="running-state" class="w-[8em] mx-1.5 text-center text-white disabled:opacity-40 text-center bg-[#333]  text-center border border-[#666] py-2 rounded-md">
+
+    <div id="running-state" class="w-[8em] h-fit  mx-1.5 text-center text-white disabled:opacity-40 text-center bg-[#333]  text-center border border-[#666] py-2 rounded-md">
       Idle
     </div>
 
-    <button id="start-button" class="flex w-[11em] mx-1.5 disabled:opacity-40 bg-[#333] text-white border border-[#666] py-2 hover:bg-[#444] rounded-md">
+    <button id="start-button" class="flex h-fit  w-[11em] mx-1.5 disabled:opacity-40 bg-[#333] text-white border border-[#666] py-2 hover:bg-[#444] rounded-md">
       <div class="grow text-left pl-6">Start</div>
       <kbd class="border border-[#666] px-2 rounded mx-2 text-[#999]">1</kbd>
     </button>
 
-    <button id="pause-button" class="flex w-[11em] mx-1.5 disabled:opacity-40 bg-[#333] text-white border border-[#666] py-2 hover:bg-[#444] rounded-md" disabled="true">
+    <button id="pause-button" class="flex h-fit  w-[11em] mx-1.5 disabled:opacity-40 bg-[#333] text-white border border-[#666] py-2 hover:bg-[#444] rounded-md" disabled="true">
       <div class="grow text-left pl-6">Pause</div>
       <kbd class="border border-[#666] px-2 rounded mx-2 text-[#999]">2</kbd>
     </button>
 
-    <button id="reset-button" class="flex w-[11em] mx-1.5 disabled:opacity-40 bg-[#333] text-white border border-[#666] py-2 hover:bg-[#444] rounded-md">
+    <button id="reset-button" class="flex h-fit  w-[11em] mx-1.5 disabled:opacity-40 bg-[#333] text-white border border-[#666] py-2 hover:bg-[#444] rounded-md">
       <div class="grow text-left pl-6">Reset</div>
       <kbd class="border border-[#666] px-2 rounded mx-2 text-[#999]">3</kbd>
     </button>
-    <button id="random-button" class="flex w-[11em] mx-1.5 disabled:opacity-40 bg-[#333] text-white border border-[#666] py-2 hover:bg-[#444] rounded-md">
+
+    <button id="random-button" class="flex h-fit w-[11em] mx-1.5 disabled:opacity-40 bg-[#333] text-white border border-[#666] py-2 hover:bg-[#444] rounded-md">
       <div class="grow text-left pl-6">Randomize</div>
       <kbd class="border border-[#666] px-2 rounded mx-2 text-[#999]">4</kbd>
     </button>
+  </div>
   <script type="module" src="main.js"></script>
 </body>
 </html>
