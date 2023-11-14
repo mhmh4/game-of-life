@@ -22,7 +22,6 @@ const randomizeButton = document.getElementById("random-button");
 const runningState = document.getElementById("running-state");
 
 const mouseIndicator = document.getElementById("mouse-indicator");
-const generationIndicator = document.getElementById("generation-indicator");
 const aliveCellsIndicator = document.getElementById("alive-cells-indicator");
 
 const m = canvas.width / CELL_LENGTH;
@@ -44,7 +43,6 @@ startButton.addEventListener("click", () => {
     let aliveCount = countAliveCells(grid);
     aliveCellsIndicator.innerText = aliveCount;
     drawCells(grid);
-    generationIndicator.innerText = parseInt(generationIndicator.innerText) + 1;
   }, DELAY);
 });
 
@@ -58,7 +56,6 @@ pauseButton.addEventListener("click", () => {
 resetButton.addEventListener("click", () => {
   pauseButton.click();
   drawCells(grid);
-  generationIndicator.innerText = "0";
   aliveCellsIndicator.innerHTML = "0";
 
   for (let i = 0; i < m; i++) {
